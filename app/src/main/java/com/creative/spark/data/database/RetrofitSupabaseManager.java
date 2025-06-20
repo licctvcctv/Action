@@ -6,6 +6,8 @@ import com.creative.spark.data.api.SupabaseApi;
 import com.creative.spark.data.model.TravelNote;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.ExclusionStrategy;
+import com.google.gson.FieldAttributes;
 import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -215,15 +217,39 @@ public class RetrofitSupabaseManager {
             return;
         }
 
-        // 测试序列化结果
-        Gson testGson = new GsonBuilder()
+        // 创建专门用于更新的Gson实例，包含ID字段
+        Gson updateGson = new GsonBuilder()
                 .excludeFieldsWithoutExposeAnnotation()
                 .setDateFormat("yyyy-MM-dd HH:mm:ss")
+                .setExclusionStrategies(new ExclusionStrategy() {
+                    @Override
+                    public boolean shouldSkipField(FieldAttributes f) {
+                        // 对于更新操作，不跳过任何有@Expose注解的字段
+                        return false;
+                    }
+
+                    @Override
+                    public boolean shouldSkipClass(Class<?> clazz) {
+                        return false;
+                    }
+                })
                 .create();
-        String serializedJson = testGson.toJson(note);
+
+        // 创建更新数据对象，只包含需要更新的字段
+        TravelNote updateData = new TravelNote();
+        updateData.setTitle(note.getTitle());
+        updateData.setContent(note.getContent());
+        updateData.setCategory(note.getCategory());
+        updateData.setUserId(note.getUserId());
+        updateData.setUpdatedAt(note.getUpdatedAt());
+        updateData.setFavorite(note.isFavorite());
+        updateData.setImageUrl(note.getImageUrl());
+        updateData.setRating(note.getRating());
+
+        String serializedJson = updateGson.toJson(updateData);
         Log.d(TAG, "更新时序列化后的JSON: " + serializedJson);
 
-        api.updateNote("eq." + note.getNoteId(), note).enqueue(new Callback<TravelNote>() {
+        api.updateNote("eq." + note.getNoteId(), updateData).enqueue(new Callback<TravelNote>() {
             @Override
             public void onResponse(Call<TravelNote> call, Response<TravelNote> response) {
                 Log.d(TAG, "更新游记响应 - 状态码: " + response.code());

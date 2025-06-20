@@ -6,7 +6,7 @@ import com.google.gson.annotations.Expose;
 
 public class TravelNote implements Serializable {
     @SerializedName("id")
-    @Expose(serialize = false)
+    @Expose(serialize = false, deserialize = true)
     private int noteId;
 
     @SerializedName("title")
