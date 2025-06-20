@@ -96,7 +96,7 @@ public class RetrofitSupabaseManager {
                     // 调试：打印每个笔记的ID和完整信息
                     for (TravelNote note : notes) {
                         Log.d(TAG, "笔记详情: " + note.toString());
-                        Log.d(TAG, "笔记ID检查: " + note.getNoteId() + " (类型: " + note.getNoteId().getClass().getSimpleName() + ")");
+                        Log.d(TAG, "笔记ID检查: " + note.getNoteId() + " (类型: int)");
                     }
 
                     callback.onSuccess(notes);
