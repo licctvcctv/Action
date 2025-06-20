@@ -279,14 +279,14 @@ public class RetrofitSupabaseManager {
         String serializedJson = updateGson.toJson(updateData);
         Log.d(TAG, "更新时序列化后的JSON: " + serializedJson);
 
-        api.updateNote("eq." + note.getNoteId(), updateData).enqueue(new Callback<TravelNote>() {
+        api.updateNote("eq." + note.getNoteId(), updateData).enqueue(new Callback<java.util.List<TravelNote>>() {
             @Override
-            public void onResponse(Call<TravelNote> call, Response<TravelNote> response) {
+            public void onResponse(Call<java.util.List<TravelNote>> call, Response<java.util.List<TravelNote>> response) {
                 Log.d(TAG, "更新游记响应 - 状态码: " + response.code());
 
-                if (response.isSuccessful()) {
-                    TravelNote updatedNote = response.body();
-                    Log.d(TAG, "游记更新成功: " + (updatedNote != null ? updatedNote.toString() : "null"));
+                if (response.isSuccessful() && response.body() != null && !response.body().isEmpty()) {
+                    TravelNote updatedNote = response.body().get(0); // 获取数组中的第一个元素
+                    Log.d(TAG, "游记更新成功: " + updatedNote.toString());
                     callback.onSuccess(updatedNote);
                 } else {
                     String errorBody = "";
@@ -307,7 +307,7 @@ public class RetrofitSupabaseManager {
             }
 
             @Override
-            public void onFailure(Call<TravelNote> call, Throwable t) {
+            public void onFailure(Call<java.util.List<TravelNote>> call, Throwable t) {
                 String errorMessage = "更新请求失败: " + t.getMessage();
                 Log.e(TAG, errorMessage, t);
                 callback.onError(errorMessage);

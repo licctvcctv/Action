@@ -23,7 +23,7 @@ public interface SupabaseApi {
     Call<TravelNote> createNote(@Body TravelNote note);
 
     @PATCH("travel_notes")
-    Call<TravelNote> updateNote(@Query("id") String filter, @Body java.util.Map<String, Object> updateData);
+    Call<java.util.List<TravelNote>> updateNote(@Query("id") String filter, @Body java.util.Map<String, Object> updateData);
 
     @DELETE("travel_notes")
     Call<Void> deleteNote(@Query("id") String filter);
