@@ -89,3 +89,9 @@ lint/tmp/
 
 # Temporary SDK files
 C:/Android/
+
+# Large files and backup directories
+backup_layouts/
+gradle-*.zip
+gradle-*/
+*.zip
