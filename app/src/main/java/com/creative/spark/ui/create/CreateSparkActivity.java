@@ -86,7 +86,7 @@ public class CreateSparkActivity extends AppCompatActivity {
     }
 
     private void setupQuickTags() {
-        String[] quickTags = {"灵感", "创意", "想法", "计划", "笔记", "重要"};
+        String[] quickTags = {"Inspiration", "Creative", "Ideas", "Plans", "Notes", "Important"};
 
         for (String tag : quickTags) {
             Chip tagChip = new Chip(this);
@@ -154,9 +154,9 @@ public class CreateSparkActivity extends AppCompatActivity {
 
             @Override
             public void onError(String error) {
-                Log.e(TAG, "笔记保存失败: " + error);
+                Log.e(TAG, "Note save failed: " + error);
                 runOnUiThread(() -> {
-                    Toast.makeText(CreateSparkActivity.this, "保存失败: " + error, Toast.LENGTH_LONG).show();
+                    Toast.makeText(CreateSparkActivity.this, "Save failed: " + error, Toast.LENGTH_LONG).show();
                 });
             }
         });
@@ -216,10 +216,10 @@ public class CreateSparkActivity extends AppCompatActivity {
 
     private void showDiscardDialog() {
         new com.google.android.material.dialog.MaterialAlertDialogBuilder(this)
-            .setTitle("放弃编辑")
-            .setMessage("您有未保存的内容，确定要放弃吗？")
-            .setPositiveButton("放弃", (dialog, which) -> finish())
-            .setNegativeButton("继续编辑", null)
+            .setTitle("Discard Changes")
+            .setMessage("You have unsaved content. Are you sure you want to discard it?")
+            .setPositiveButton("Discard", (dialog, which) -> finish())
+            .setNegativeButton("Continue Editing", null)
             .show();
     }
 }

@@ -249,20 +249,20 @@ public class TravelNote implements Serializable {
         this.syncStatus = syncStatus;
     }
 
-    // 协作状态显示方法
+    // Collaboration status display methods
     public String getCollaborationStatusText() {
         if (isCollaborative) {
-            return onlineUserCount + "人在线";
+            return onlineUserCount + " users online";
         } else {
-            return "个人文档";
+            return "Personal note";
         }
     }
 
     public String getLastActivityText() {
         if (lastEditBy != null && !lastEditBy.isEmpty()) {
-            return "最近编辑：" + lastEditBy;
+            return "Last edited by: " + lastEditBy;
         } else {
-            return "暂无协作活动";
+            return "No collaboration activity";
         }
     }
 

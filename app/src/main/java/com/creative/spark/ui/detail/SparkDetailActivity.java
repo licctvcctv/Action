@@ -73,7 +73,7 @@ public class SparkDetailActivity extends AppCompatActivity {
         android.util.Log.d("SparkDetail", "接收到的笔记ID: " + sparkId);
 
         if (sparkId == -1) {
-            Toast.makeText(this, "无效的笔记ID", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Invalid note ID", Toast.LENGTH_SHORT).show();
             finish();
             return;
         }
@@ -188,7 +188,7 @@ public class SparkDetailActivity extends AppCompatActivity {
                         displaySparkData();
                     } else {
                         android.util.Log.e("SparkDetail", "未找到ID为 " + sparkId + " 的笔记");
-                        Toast.makeText(SparkDetailActivity.this, "无法加载文档内容 (ID: " + sparkId + ")", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(SparkDetailActivity.this, "Unable to load note content (ID: " + sparkId + ")", Toast.LENGTH_SHORT).show();
                         finish();
                     }
                 });
@@ -197,7 +197,7 @@ public class SparkDetailActivity extends AppCompatActivity {
             @Override
             public void onError(String error) {
                 runOnUiThread(() -> {
-                    Toast.makeText(SparkDetailActivity.this, "加载失败: " + error, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SparkDetailActivity.this, "Load failed: " + error, Toast.LENGTH_SHORT).show();
                     finish();
                 });
             }
@@ -206,7 +206,7 @@ public class SparkDetailActivity extends AppCompatActivity {
 
     private void displaySparkData() {
         if (currentNote == null) {
-            Toast.makeText(this, "无法加载笔记数据", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Unable to load note data", Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -285,17 +285,17 @@ public class SparkDetailActivity extends AppCompatActivity {
     }
 
     private void setEditMode() {
-        updateSparkButton.setText("保存");
+        updateSparkButton.setText("Save");
         updateSparkButton.setIcon(getDrawable(R.drawable.ic_save));
         enableInputs(true);
-        topToolbar.setTitle("编辑灵感");
+        topToolbar.setTitle("Edit Note");
     }
 
     private void setViewMode() {
-        updateSparkButton.setText("编辑");
+        updateSparkButton.setText("Edit");
         updateSparkButton.setIcon(getDrawable(R.drawable.ic_edit));
         enableInputs(false);
-        topToolbar.setTitle("灵感详情");
+        topToolbar.setTitle("Note Details");
     }
 
     private void enableInputs(boolean enable) {
@@ -330,7 +330,7 @@ public class SparkDetailActivity extends AppCompatActivity {
             public void onError(String error) {
                 android.util.Log.e("SparkDetail", "笔记更新失败: " + error);
                 runOnUiThread(() -> {
-                    Toast.makeText(SparkDetailActivity.this, "更新失败: " + error, Toast.LENGTH_LONG).show();
+                    Toast.makeText(SparkDetailActivity.this, "Update failed: " + error, Toast.LENGTH_LONG).show();
                 });
             }
         });
@@ -401,12 +401,12 @@ public class SparkDetailActivity extends AppCompatActivity {
     private void shareSparkContent() {
         String shareText = currentNote.getTitle() + "\n\n" +
                           currentNote.getContent() + "\n\n" +
-                          "—— 来自协作文档";
+                          "—— From Inspiration Notes";
 
         Intent shareIntent = new Intent(Intent.ACTION_SEND);
         shareIntent.setType("text/plain");
         shareIntent.putExtra(Intent.EXTRA_TEXT, shareText);
-        startActivity(Intent.createChooser(shareIntent, "分享文档"));
+        startActivity(Intent.createChooser(shareIntent, "Share Note"));
     }
 
     @Override
@@ -441,10 +441,10 @@ public class SparkDetailActivity extends AppCompatActivity {
 
     private void showDiscardChangesDialog() {
         new MaterialAlertDialogBuilder(this)
-                .setTitle("放弃更改")
-                .setMessage("您有未保存的更改，确定要放弃吗？")
-                .setPositiveButton("放弃", (dialog, which) -> finish())
-                .setNegativeButton("继续编辑", null)
+                .setTitle("Discard Changes")
+                .setMessage("You have unsaved changes. Are you sure you want to discard them?")
+                .setPositiveButton("Discard", (dialog, which) -> finish())
+                .setNegativeButton("Continue Editing", null)
                 .show();
     }
 
@@ -469,7 +469,7 @@ public class SparkDetailActivity extends AppCompatActivity {
             currentNote.setCollaborative(true);
             currentNote.setCollaboratorCount(1); // 当前用户
             currentNote.setOnlineUserCount(1);
-            currentNote.setLastEditBy("我");
+            currentNote.setLastEditBy("Me");
             currentNote.setCommentCount(0);
             currentNote.setVersionCount(1);
         }
@@ -503,7 +503,7 @@ public class SparkDetailActivity extends AppCompatActivity {
                 // 设置点击事件显示用户信息
                 final String userName = names.get(i);
                 avatarView.setOnClickListener(v ->
-                    Toast.makeText(this, "协作者：" + userName, Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Collaborator: " + userName, Toast.LENGTH_SHORT).show()
                 );
 
                 collaboratorsAvatars.addView(avatarView);
@@ -532,7 +532,7 @@ public class SparkDetailActivity extends AppCompatActivity {
         if (currentNote == null || realtimeStatus == null || lastEditInfo == null) return;
 
         // 更新实时状态
-        String statusText = "实时同步中 - " + currentNote.getOnlineUserCount() + "人在线";
+        String statusText = "Real-time sync - " + currentNote.getOnlineUserCount() + " users online";
         realtimeStatus.setText(statusText);
 
         // 更新最近编辑信息

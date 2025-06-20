@@ -42,7 +42,7 @@ public class DiscoverActivity extends AppCompatActivity implements SparkListAdap
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_discover);
-        
+
         initializeUserSession();
         initializeViews();
         setupToolbar();
@@ -75,7 +75,7 @@ public class DiscoverActivity extends AppCompatActivity implements SparkListAdap
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setTitle(R.string.title_search_notes);
         }
-        
+
         topToolbar.setNavigationOnClickListener(v -> finish());
     }
 
@@ -100,13 +100,13 @@ public class DiscoverActivity extends AppCompatActivity implements SparkListAdap
 
     private void setupFilterChips() {
         String[] categories = getResources().getStringArray(R.array.categories_all);
-        
+
         for (String category : categories) {
             Chip filterChip = new Chip(this);
             filterChip.setText(category);
             filterChip.setCheckable(true);
             filterChip.setChecked(category.equals("全部"));
-            
+
             filterChip.setOnCheckedChangeListener((chip, isChecked) -> {
                 if (isChecked) {
                     currentFilter = category;
@@ -114,7 +114,7 @@ public class DiscoverActivity extends AppCompatActivity implements SparkListAdap
                     performSearch(searchEditText.getText().toString().trim());
                 }
             });
-            
+
             filterChipGroup.addView(filterChip);
         }
     }
@@ -138,27 +138,27 @@ public class DiscoverActivity extends AppCompatActivity implements SparkListAdap
             showInitialState();
             return;
         }
-        
+
         databaseManager.searchNotes(activeUserId, searchTerm, new RetrofitSupabaseManager.DatabaseCallback() {
             @Override
             public void onSuccess(Object result) {
                 List<TravelNote> searchResults = (List<TravelNote>) result;
-                
-                // Apply filter if not "全部"
-                if (!currentFilter.equals("全部")) {
+
+                // Apply filter if not "All"
+                if (!currentFilter.equals("All")) {
                     searchResults = filterSearchResults(searchResults, currentFilter);
                 }
-                
+
                 final List<TravelNote> finalResults = searchResults;
                 runOnUiThread(() -> {
                     displaySearchResults(finalResults, searchTerm);
                 });
             }
-            
+
             @Override
             public void onError(String error) {
                 runOnUiThread(() -> {
-                    Toast.makeText(DiscoverActivity.this, "搜索失败: " + error, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(DiscoverActivity.this, "Search failed: " + error, Toast.LENGTH_SHORT).show();
                     showInitialState();
                 });
             }
@@ -190,15 +190,15 @@ public class DiscoverActivity extends AppCompatActivity implements SparkListAdap
         emptyStateContainer.setVisibility(View.VISIBLE);
         emptyStateMessage.setText(getString(R.string.empty_search_results));
         searchResultCount.setVisibility(View.VISIBLE);
-        searchResultCount.setText(String.format("未找到与 \"%s\" 相关的灵感", searchTerm));
+        searchResultCount.setText(String.format("No notes found related to \"%s\"", searchTerm));
     }
 
     private void showResults(List<TravelNote> results) {
         searchResultsRecycler.setVisibility(View.VISIBLE);
         emptyStateContainer.setVisibility(View.GONE);
         searchResultCount.setVisibility(View.VISIBLE);
-        searchResultCount.setText(String.format("找到 %d 条相关灵感", results.size()));
-        
+        searchResultCount.setText(String.format("Found %d related notes", results.size()));
+
         if (sparkAdapter == null) {
             sparkAdapter = new SparkListAdapter(this, results, this);
             searchResultsRecycler.setAdapter(sparkAdapter);
@@ -213,7 +213,7 @@ public class DiscoverActivity extends AppCompatActivity implements SparkListAdap
         detailIntent.putExtra("note_id", note.getNoteId());
         startActivity(detailIntent);
     }
-    
+
     @Override
     public void onNoteLongClick(TravelNote note) {
         // Handle long click if needed
