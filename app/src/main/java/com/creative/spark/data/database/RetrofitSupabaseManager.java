@@ -58,8 +58,8 @@ public class RetrofitSupabaseManager {
                 .build();
 
         // 配置Gson以正确处理@Expose注解
+        // 注意：不能使用excludeFieldsWithoutExposeAnnotation()，因为它会影响反序列化
         Gson gson = new GsonBuilder()
-                .excludeFieldsWithoutExposeAnnotation()
                 .setDateFormat("yyyy-MM-dd HH:mm:ss")
                 .serializeNulls()
                 .create();
@@ -84,6 +84,12 @@ public class RetrofitSupabaseManager {
                 if (response.isSuccessful() && response.body() != null) {
                     List<TravelNote> notes = response.body();
                     Log.d(TAG, "获取到 " + notes.size() + " 条游记");
+
+                    // 调试：打印每个笔记的ID
+                    for (TravelNote note : notes) {
+                        Log.d(TAG, "笔记: " + note.getTitle() + ", ID: " + note.getNoteId());
+                    }
+
                     callback.onSuccess(notes);
                 } else {
                     Log.e(TAG, "API响应失败: " + response.code());
@@ -142,15 +148,27 @@ public class RetrofitSupabaseManager {
     public void createTravelNote(TravelNote note, DatabaseCallback callback) {
         Log.d(TAG, "开始创建游记，数据: " + note.toString());
 
+        // 创建专门用于创建操作的数据对象，不包含ID
+        TravelNote createData = new TravelNote();
+        createData.setTitle(note.getTitle());
+        createData.setContent(note.getContent());
+        createData.setCategory(note.getCategory());
+        createData.setUserId(note.getUserId());
+        createData.setCreatedTimestamp(note.getCreatedTimestamp());
+        createData.setUpdatedAt(note.getUpdatedAt());
+        createData.setFavorite(note.isFavorite());
+        createData.setImageUrl(note.getImageUrl());
+        createData.setRating(note.getRating());
+
         // 测试序列化结果
         Gson testGson = new GsonBuilder()
                 .excludeFieldsWithoutExposeAnnotation()
                 .setDateFormat("yyyy-MM-dd HH:mm:ss")
                 .create();
-        String serializedJson = testGson.toJson(note);
-        Log.d(TAG, "序列化后的JSON: " + serializedJson);
+        String serializedJson = testGson.toJson(createData);
+        Log.d(TAG, "创建时序列化后的JSON: " + serializedJson);
 
-        api.createNote(note).enqueue(new Callback<TravelNote>() {
+        api.createNote(createData).enqueue(new Callback<TravelNote>() {
             @Override
             public void onResponse(Call<TravelNote> call, Response<TravelNote> response) {
                 Log.d(TAG, "创建游记响应 - 状态码: " + response.code());
