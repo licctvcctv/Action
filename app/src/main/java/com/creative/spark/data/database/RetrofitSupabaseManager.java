@@ -85,9 +85,18 @@ public class RetrofitSupabaseManager {
                     List<TravelNote> notes = response.body();
                     Log.d(TAG, "获取到 " + notes.size() + " 条游记");
 
-                    // 调试：打印每个笔记的ID
+                    // 调试：打印原始响应
+                    try {
+                        String rawResponse = response.raw().toString();
+                        Log.d(TAG, "原始响应: " + rawResponse);
+                    } catch (Exception e) {
+                        Log.e(TAG, "无法获取原始响应", e);
+                    }
+
+                    // 调试：打印每个笔记的ID和完整信息
                     for (TravelNote note : notes) {
-                        Log.d(TAG, "笔记: " + note.getTitle() + ", ID: " + note.getNoteId());
+                        Log.d(TAG, "笔记详情: " + note.toString());
+                        Log.d(TAG, "笔记ID检查: " + note.getNoteId() + " (类型: " + note.getNoteId().getClass().getSimpleName() + ")");
                     }
 
                     callback.onSuccess(notes);
@@ -253,16 +262,19 @@ public class RetrofitSupabaseManager {
                 })
                 .create();
 
-        // 创建更新数据对象，只包含需要更新的字段
-        TravelNote updateData = new TravelNote();
-        updateData.setTitle(note.getTitle());
-        updateData.setContent(note.getContent());
-        updateData.setCategory(note.getCategory());
-        updateData.setUserId(note.getUserId());
-        updateData.setUpdatedAt(note.getUpdatedAt());
-        updateData.setFavorite(note.isFavorite());
-        updateData.setImageUrl(note.getImageUrl());
-        updateData.setRating(note.getRating());
+        // 创建更新数据对象，只包含数据库中存在的字段
+        // 使用Map来精确控制发送的字段
+        java.util.Map<String, Object> updateData = new java.util.HashMap<>();
+        updateData.put("title", note.getTitle());
+        updateData.put("content", note.getContent());
+        updateData.put("category", note.getCategory());
+        updateData.put("user_id", note.getUserId());
+        updateData.put("updated_at", note.getUpdatedAt());
+        updateData.put("is_favorite", note.isFavorite());
+        if (note.getImageUrl() != null && !note.getImageUrl().equals("null")) {
+            updateData.put("image_url", note.getImageUrl());
+        }
+        updateData.put("rating", note.getRating());
 
         String serializedJson = updateGson.toJson(updateData);
         Log.d(TAG, "更新时序列化后的JSON: " + serializedJson);
