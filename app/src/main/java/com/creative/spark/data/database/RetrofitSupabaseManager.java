@@ -8,6 +8,9 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.ExclusionStrategy;
 import com.google.gson.FieldAttributes;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -157,34 +160,41 @@ public class RetrofitSupabaseManager {
     public void createTravelNote(TravelNote note, DatabaseCallback callback) {
         Log.d(TAG, "开始创建游记，数据: " + note.toString());
 
-        // 创建专门用于创建操作的数据对象，不包含ID
-        TravelNote createData = new TravelNote();
-        createData.setTitle(note.getTitle());
-        createData.setContent(note.getContent());
-        createData.setCategory(note.getCategory());
-        createData.setUserId(note.getUserId());
-        createData.setCreatedTimestamp(note.getCreatedTimestamp());
-        createData.setUpdatedAt(note.getUpdatedAt());
-        createData.setFavorite(note.isFavorite());
-        createData.setImageUrl(note.getImageUrl());
-        createData.setRating(note.getRating());
+        // 创建专门用于创建操作的数据对象，使用Map精确控制字段
+        java.util.Map<String, Object> createData = new java.util.HashMap<>();
+        createData.put("title", note.getTitle());
+        createData.put("content", note.getContent());
+        createData.put("category", note.getCategory());
+        createData.put("user_id", note.getUserId());
+
+        // 使用ISO 8601格式的时间戳
+        String currentTimestamp = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'+00:00'", Locale.getDefault()).format(new Date());
+        createData.put("created_at", currentTimestamp);
+        createData.put("updated_at", currentTimestamp);
+
+        createData.put("is_favorite", note.isFavorite());
+        createData.put("rating", note.getRating());
+
+        // 只有在imageUrl不为null且不为"null"字符串时才添加
+        if (note.getImageUrl() != null && !note.getImageUrl().equals("null")) {
+            createData.put("image_url", note.getImageUrl());
+        }
 
         // 测试序列化结果
         Gson testGson = new GsonBuilder()
-                .excludeFieldsWithoutExposeAnnotation()
-                .setDateFormat("yyyy-MM-dd HH:mm:ss")
+                .setDateFormat("yyyy-MM-dd'T'HH:mm:ss'+00:00'")
                 .create();
         String serializedJson = testGson.toJson(createData);
         Log.d(TAG, "创建时序列化后的JSON: " + serializedJson);
 
-        api.createNote(createData).enqueue(new Callback<TravelNote>() {
+        api.createNote(createData).enqueue(new Callback<java.util.List<TravelNote>>() {
             @Override
-            public void onResponse(Call<TravelNote> call, Response<TravelNote> response) {
+            public void onResponse(Call<java.util.List<TravelNote>> call, Response<java.util.List<TravelNote>> response) {
                 Log.d(TAG, "创建游记响应 - 状态码: " + response.code());
 
-                if (response.isSuccessful()) {
-                    TravelNote createdNote = response.body();
-                    Log.d(TAG, "游记创建成功: " + (createdNote != null ? createdNote.toString() : "null"));
+                if (response.isSuccessful() && response.body() != null && !response.body().isEmpty()) {
+                    TravelNote createdNote = response.body().get(0); // 获取数组中的第一个元素
+                    Log.d(TAG, "游记创建成功: " + createdNote.toString());
                     callback.onSuccess(createdNote);
                 } else {
                     String errorBody = "";
@@ -205,7 +215,7 @@ public class RetrofitSupabaseManager {
             }
 
             @Override
-            public void onFailure(Call<TravelNote> call, Throwable t) {
+            public void onFailure(Call<java.util.List<TravelNote>> call, Throwable t) {
                 String errorMessage = "创建请求失败: " + t.getMessage();
                 Log.e(TAG, errorMessage, t);
                 callback.onError(errorMessage);

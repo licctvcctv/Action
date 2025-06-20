@@ -20,7 +20,7 @@ public interface SupabaseApi {
     Call<List<TravelNote>> searchNotes(@Query("or") String searchQuery);
 
     @POST("travel_notes")
-    Call<TravelNote> createNote(@Body TravelNote note);
+    Call<java.util.List<TravelNote>> createNote(@Body java.util.Map<String, Object> createData);
 
     @PATCH("travel_notes")
     Call<java.util.List<TravelNote>> updateNote(@Query("id") String filter, @Body java.util.Map<String, Object> updateData);
