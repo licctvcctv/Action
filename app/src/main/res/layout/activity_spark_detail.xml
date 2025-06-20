@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/inspiration_background">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/inspiration_surface"
+        app:elevation="2dp">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:navigationIcon="@drawable/ic_back"
+            app:menu="@menu/detail_menu"
+            app:titleTextColor="@color/text_primary" />
+
+        <!-- 协作状态栏 -->
+        <LinearLayout
+            android:id="@+id/collaboration_status_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="12dp"
+            android:background="@color/inspiration_primary_container"
+            android:gravity="center_vertical"
+            android:visibility="gone">
+
+            <!-- 协作者头像滚动区域 -->
+            <HorizontalScrollView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:scrollbars="none">
+
+                <LinearLayout
+                    android:id="@+id/collaborators_avatars"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingEnd="8dp">
+
+                    <!-- 协作者头像会动态添加到这里 -->
+
+                </LinearLayout>
+
+            </HorizontalScrollView>
+
+            <!-- 协作功能按钮 -->
+            <ImageButton
+                android:id="@+id/btn_comments"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:src="@android:drawable/ic_menu_edit"
+                android:layout_marginEnd="8dp"
+                android:contentDescription="评论" />
+
+            <ImageButton
+                android:id="@+id/btn_version_history"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:src="@android:drawable/ic_menu_recent_history"
+                android:layout_marginEnd="8dp"
+                android:contentDescription="版本历史" />
+
+            <ImageButton
+                android:id="@+id/btn_collaboration_settings"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:src="@android:drawable/ic_menu_manage"
+                android:contentDescription="协作设置" />
+
+        </LinearLayout>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="24dp">
+
+            <!-- 标题输入 -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_spark_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                app:startIconDrawable="@drawable/ic_title"
+                app:boxCornerRadiusTopStart="16dp"
+                app:boxCornerRadiusTopEnd="16dp"
+                app:boxCornerRadiusBottomStart="16dp"
+                app:boxCornerRadiusBottomEnd="16dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/hint_title"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:enabled="false" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- 分类和操作按钮 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="16dp">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/til_collection"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="8dp"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                    app:startIconDrawable="@drawable/ic_category"
+                    app:boxCornerRadiusTopStart="16dp"
+                    app:boxCornerRadiusTopEnd="16dp"
+                    app:boxCornerRadiusBottomStart="16dp"
+                    app:boxCornerRadiusBottomEnd="16dp">
+
+                    <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/hint_select_category"
+                        android:inputType="none"
+                        android:enabled="false" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_favorite"
+                    style="@style/Widget.MaterialComponents.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:text="收藏"
+                    app:chipIcon="@drawable/ic_favorite_border"
+                    app:chipBackgroundColor="@color/inspiration_chip_background"
+                    app:chipStrokeWidth="1dp"
+                    app:chipStrokeColor="@color/inspiration_chip_stroke" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_share"
+                    style="@style/Widget.MaterialComponents.Chip.Entry"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="分享"
+                    app:chipIcon="@drawable/ic_share"
+                    app:chipBackgroundColor="@color/inspiration_chip_background"
+                    app:chipStrokeWidth="1dp"
+                    app:chipStrokeColor="@color/inspiration_chip_stroke" />
+
+            </LinearLayout>
+
+            <!-- 内容输入 -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_spark_content"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:minHeight="300dp"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                app:startIconDrawable="@drawable/ic_content"
+                app:boxCornerRadiusTopStart="16dp"
+                app:boxCornerRadiusTopEnd="16dp"
+                app:boxCornerRadiusBottomStart="16dp"
+                app:boxCornerRadiusBottomEnd="16dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="@string/hint_content"
+                    android:inputType="textMultiLine"
+                    android:gravity="top"
+                    android:paddingTop="16dp"
+                    android:paddingBottom="16dp"
+                    android:scrollbars="vertical"
+                    android:enabled="false" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- 协作功能区域 -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/collaboration_features_card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="2dp"
+                app:cardBackgroundColor="@color/inspiration_secondary_container"
+                android:visibility="gone">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="协作功能"
+                        android:textStyle="bold"
+                        android:textSize="16sp"
+                        android:textColor="@color/inspiration_on_secondary_container"
+                        android:layout_marginBottom="12dp" />
+
+                    <!-- 协作功能按钮组 -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btn_add_comment"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginEnd="8dp"
+                            android:text="添加评论"
+                            android:textAllCaps="false"
+                            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                            app:icon="@android:drawable/ic_menu_edit" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btn_view_versions"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginStart="8dp"
+                            android:text="版本历史"
+                            android:textAllCaps="false"
+                            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                            app:icon="@android:drawable/ic_menu_recent_history" />
+
+                    </LinearLayout>
+
+                    <!-- 实时状态显示 -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="12dp"
+                        android:gravity="center_vertical">
+
+                        <TextView
+                            android:id="@+id/realtime_status"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="实时同步中..."
+                            android:textSize="12sp"
+                            android:textColor="@color/inspiration_on_secondary_container"
+                            android:drawableStart="@android:drawable/ic_popup_sync"
+                            android:drawablePadding="4dp"
+                            android:gravity="center_vertical" />
+
+                        <TextView
+                            android:id="@+id/last_edit_info"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="最近编辑：张小明"
+                            android:textSize="12sp"
+                            android:textColor="@color/inspiration_on_secondary_container" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- 删除按钮 -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_delete_spark"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="删除文档"
+                android:textAllCaps="false"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                app:strokeColor="@color/inspiration_error"
+                android:textColor="@color/inspiration_error"
+                android:visibility="gone" />
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <!-- 编辑/保存按钮 -->
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/fab_update_spark"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="24dp"
+        android:text="编辑"
+        app:icon="@drawable/ic_edit"
+        app:iconTint="@color/inspiration_on_primary"
+        app:backgroundTint="@color/inspiration_primary" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

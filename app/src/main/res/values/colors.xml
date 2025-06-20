@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 灵感笔记主题色 - 优雅的淡紫色系 -->
+    <color name="inspiration_primary">#7C4DFF</color>
+    <color name="inspiration_primary_variant">#6200EA</color>
+    <color name="inspiration_on_primary">#FFFFFF</color>
+    <color name="inspiration_primary_container">#E1D5FF</color>
+    <color name="inspiration_on_primary_container">#21005D</color>
+    
+    <color name="inspiration_secondary">#FF6E6E</color>
+    <color name="inspiration_secondary_variant">#FF5252</color>
+    <color name="inspiration_on_secondary">#FFFFFF</color>
+    <color name="inspiration_secondary_container">#FFE0E0</color>
+    <color name="inspiration_on_secondary_container">#410002</color>
+    
+    <color name="inspiration_tertiary">#4ECDC4</color>
+    <color name="inspiration_on_tertiary">#FFFFFF</color>
+    
+    <color name="inspiration_error">#FF6B6B</color>
+    <color name="inspiration_on_error">#FFFFFF</color>
+    
+    <!-- 新拟态背景色 -->
+    <color name="inspiration_background">#F5F3FF</color>
+    <color name="inspiration_on_background">#1C1B1F</color>
+    
+    <color name="inspiration_surface">#FFFFFF</color>
+    <color name="inspiration_on_surface">#1C1B1F</color>
+    <color name="inspiration_surface_variant">#E7E0EC</color>
+    <color name="inspiration_on_surface_variant">#49454F</color>
+    
+    <color name="inspiration_outline">#E0E0E0</color>
+    <color name="inspiration_outline_variant">#CAC4D0</color>
+    
+    <!-- 卡片和输入框背景 -->
+    <color name="inspiration_card_background">#FEFEFE</color>
+    <color name="inspiration_input_background">#F8F6FF</color>
+    
+    <!-- 新拟态阴影色 -->
+    <color name="neumorphism_shadow_light">#FFFFFF</color>
+    <color name="neumorphism_shadow_dark">#D1C4E9</color>
+    
+    <!-- 分类颜色 - 渐变色调 -->
+    <color name="category_inspiration">#E8DAFF</color>
+    <color name="category_inspiration_text">#6200EA</color>
+    
+    <color name="category_goals">#FFE4E1</color>
+    <color name="category_goals_text">#D32F2F</color>
+    
+    <color name="category_thoughts">#E1F5FE</color>
+    <color name="category_thoughts_text">#0277BD</color>
+    
+    <color name="category_favorites">#FFF9C4</color>
+    <color name="category_favorites_text">#F57C00</color>
+    
+    <!-- 芯片颜色 -->
+    <color name="inspiration_chip_background">#F3EFFF</color>
+    <color name="inspiration_chip_stroke">#D4C5FF</color>
+    <color name="inspiration_chip_text">#6750A4</color>
+    
+    <!-- 特殊效果色 -->
+    <color name="gradient_start">#B39DDB</color>
+    <color name="gradient_end">#7E57C2</color>
+    <color name="gradient_accent">#FF80AB</color>
+    
+    <!-- 透明度变体 -->
+    <color name="primary_10">#1A7C4DFF</color>
+    <color name="primary_20">#337C4DFF</color>
+    <color name="primary_40">#667C4DFF</color>
+    
+    <!-- 状态色 -->
+    <color name="selected_background">#F0E6FF</color>
+    <color name="hover_overlay">#0A7C4DFF</color>
+    <color name="pressed_overlay">#1F7C4DFF</color>
+    
+    <!-- 文本颜色 -->
+    <color name="text_primary">#1C1B1F</color>
+    <color name="text_secondary">#625B71</color>
+    <color name="text_tertiary">#79747E</color>
+    <color name="text_disabled">#C4C4C4</color>
+    
+    <!-- 分隔线 -->
+    <color name="divider">#E0E0E0</color>
+    <color name="divider_light">#F5F5F5</color>
+    
+    <!-- 导航栏颜色 -->
+    <color name="inspiration_navigation_bar">#FAFAFA</color>
+</resources>

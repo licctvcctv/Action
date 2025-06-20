@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="8dp"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="1dp"
+    app:cardBackgroundColor="@color/inspiration_secondary_container">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="16dp"
+        android:gravity="center_vertical">
+
+        <!-- 用户头像 -->
+        <ImageView
+            android:id="@+id/iv_avatar"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="12dp"
+            android:background="@drawable/circle_background"
+            android:scaleType="centerCrop" />
+
+        <!-- 用户信息 -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:id="@+id/tv_name"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="张小明"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/inspiration_on_secondary_container" />
+
+                <View
+                    android:id="@+id/online_indicator"
+                    android:layout_width="8dp"
+                    android:layout_height="8dp"
+                    android:background="@drawable/online_indicator"
+                    android:layout_marginStart="8dp" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="zhangxiaoming@example.com"
+                android:textSize="12sp"
+                android:textColor="@color/inspiration_on_secondary_container"
+                android:alpha="0.7"
+                android:layout_marginTop="2dp" />
+
+        </LinearLayout>
+
+        <!-- 权限标签 -->
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip_permission"
+            style="@style/Widget.MaterialComponents.Chip.Entry"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="编辑"
+            android:textSize="11sp"
+            app:chipBackgroundColor="@color/inspiration_primary_container"
+            app:chipStrokeWidth="0dp"
+            app:chipCornerRadius="12dp"
+            app:chipMinHeight="24dp"
+            android:layout_marginStart="8dp" />
+
+        <!-- 更多操作按钮 -->
+        <ImageButton
+            android:id="@+id/btn_more"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@android:drawable/ic_menu_more"
+            android:layout_marginStart="8dp"
+            android:contentDescription="更多操作" />
+
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>

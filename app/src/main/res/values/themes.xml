@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.InspirationNotes" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <!-- 主色调 - 优雅的淡紫色系 -->
+        <item name="colorPrimary">@color/inspiration_primary</item>
+        <item name="colorPrimaryVariant">@color/inspiration_primary_variant</item>
+        <item name="colorOnPrimary">@color/inspiration_on_primary</item>
+        <item name="colorSecondary">@color/inspiration_secondary</item>
+        <item name="colorSecondaryVariant">@color/inspiration_secondary_variant</item>
+        <item name="colorOnSecondary">@color/inspiration_on_secondary</item>
+        <item name="colorError">@color/inspiration_error</item>
+        <item name="colorOnError">@color/inspiration_on_error</item>
+        <item name="android:colorBackground">@color/inspiration_background</item>
+        <item name="colorOnBackground">@color/inspiration_on_background</item>
+        <item name="colorSurface">@color/inspiration_surface</item>
+        <item name="colorOnSurface">@color/inspiration_on_surface</item>
+
+        <!-- 自定义样式 -->
+        <item name="materialCardViewStyle">@style/Widget.InspirationNotes.CardView</item>
+        <item name="materialButtonStyle">@style/Widget.InspirationNotes.Button</item>
+        <item name="materialButtonOutlinedStyle">@style/Widget.InspirationNotes.Button.Outlined</item>
+        <item name="textInputStyle">@style/Widget.InspirationNotes.TextInputLayout</item>
+        <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.InspirationNotes.SmallComponent</item>
+        <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.InspirationNotes.MediumComponent</item>
+        <item name="shapeAppearanceLargeComponent">@style/ShapeAppearance.InspirationNotes.LargeComponent</item>
+    </style>
+
+    <!-- 卡片样式 - 新拟态风格 -->
+    <style name="Widget.InspirationNotes.CardView" parent="Widget.MaterialComponents.CardView">
+        <item name="cardElevation">0dp</item>
+        <item name="cardCornerRadius">20dp</item>
+        <item name="cardBackgroundColor">@color/inspiration_card_background</item>
+        <item name="android:layout_margin">12dp</item>
+        <item name="shapeAppearance">@style/ShapeAppearance.InspirationNotes.Card</item>
+    </style>
+
+    <!-- 按钮样式 -->
+    <style name="Widget.InspirationNotes.Button" parent="Widget.MaterialComponents.Button">
+        <item name="cornerRadius">16dp</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:elevation">4dp</item>
+        <item name="android:stateListAnimator">@null</item>
+    </style>
+
+    <style name="Widget.InspirationNotes.Button.Outlined" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="cornerRadius">16dp</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="strokeWidth">1dp</item>
+        <item name="strokeColor">@color/inspiration_outline</item>
+    </style>
+
+    <!-- 输入框样式 -->
+    <style name="Widget.InspirationNotes.TextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
+        <item name="boxCornerRadiusTopStart">16dp</item>
+        <item name="boxCornerRadiusTopEnd">16dp</item>
+        <item name="boxCornerRadiusBottomStart">16dp</item>
+        <item name="boxCornerRadiusBottomEnd">16dp</item>
+        <item name="boxBackgroundColor">@color/inspiration_input_background</item>
+        <item name="boxStrokeWidth">0dp</item>
+        <item name="android:elevation">2dp</item>
+    </style>
+
+    <!-- 圆角形状 -->
+    <style name="ShapeAppearance.InspirationNotes.SmallComponent" parent="ShapeAppearance.MaterialComponents.SmallComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">12dp</item>
+    </style>
+
+    <style name="ShapeAppearance.InspirationNotes.MediumComponent" parent="ShapeAppearance.MaterialComponents.MediumComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">16dp</item>
+    </style>
+
+    <style name="ShapeAppearance.InspirationNotes.LargeComponent" parent="ShapeAppearance.MaterialComponents.LargeComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">20dp</item>
+    </style>
+
+    <style name="ShapeAppearance.InspirationNotes.Card" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">20dp</item>
+    </style>
+
+    <!-- 悬浮操作按钮样式 -->
+    <style name="Widget.InspirationNotes.FloatingActionButton" parent="Widget.MaterialComponents.FloatingActionButton">
+        <item name="shapeAppearance">@style/ShapeAppearance.InspirationNotes.FAB</item>
+        <item name="elevation">8dp</item>
+    </style>
+
+    <style name="ShapeAppearance.InspirationNotes.FAB" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+
+    <!-- 芯片样式 -->
+    <style name="Widget.InspirationNotes.Chip" parent="Widget.MaterialComponents.Chip.Entry">
+        <item name="chipCornerRadius">16dp</item>
+        <item name="chipBackgroundColor">@color/inspiration_chip_background</item>
+        <item name="chipStrokeColor">@color/inspiration_chip_stroke</item>
+        <item name="chipStrokeWidth">1dp</item>
+    </style>
+
+    <!-- NoActionBar 主题变体 -->
+    <style name="Theme.InspirationNotes.NoActionBar" parent="Theme.InspirationNotes">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@color/inspiration_navigation_bar</item>
+    </style>
+</resources>

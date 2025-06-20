@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">协作文档</string>
+    <string name="appbar_scrolling_view_behavior">com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior</string>
+
+    <!-- Error messages -->
+    <string name="error_empty_username_password">请输入用户名和密码</string>
+    <string name="error_login_failed">用户名或密码错误</string>
+    <string name="error_fill_all_fields">请填写所有信息</string>
+    <string name="error_password_mismatch">两次密码不一致</string>
+    <string name="error_username_exists">用户名已存在</string>
+    <string name="error_empty_title">请输入标题</string>
+    <string name="error_empty_content">请输入内容</string>
+    <string name="error_save_failed">保存失败</string>
+    <string name="error_update_failed">更新失败</string>
+    <string name="error_delete_failed">删除失败</string>
+
+    <!-- Success messages -->
+    <string name="success_register">注册成功</string>
+    <string name="success_save">保存成功</string>
+    <string name="success_update">更新成功</string>
+    <string name="success_delete">删除成功</string>
+
+    <!-- Dialog messages -->
+    <string name="dialog_delete_title">删除文档</string>
+    <string name="dialog_delete_message">确定要删除这个文档吗？</string>
+    <string name="dialog_confirm">确定</string>
+    <string name="dialog_cancel">取消</string>
+
+    <!-- UI Labels -->
+    <string name="title_my_notes">我的文档</string>
+    <string name="title_note_app">协作文档</string>
+    <string name="title_add_note">创建文档</string>
+    <string name="title_edit_note">编辑文档</string>
+    <string name="title_search_notes">搜索文档</string>
+    <string name="title_category_management">文档分类</string>
+
+    <!-- Hints -->
+    <string name="hint_username">用户名</string>
+    <string name="hint_password">密码</string>
+    <string name="hint_confirm_password">确认密码</string>
+    <string name="hint_title">文档标题</string>
+    <string name="hint_content">开始编写你的文档内容...</string>
+    <string name="hint_select_category">选择文档类型</string>
+    <string name="hint_search_keyword">搜索文档或内容</string>
+
+    <!-- Buttons -->
+    <string name="btn_login">登录</string>
+    <string name="btn_register">立即注册</string>
+    <string name="btn_save">保存</string>
+    <string name="btn_update">更新</string>
+    <string name="btn_no_account">没有账号？立即注册</string>
+
+    <!-- Empty states -->
+    <string name="empty_notes">还没有创建文档</string>
+    <string name="empty_notes_hint">开始创建你的第一个协作文档</string>
+    <string name="empty_search_results">没有找到相关文档</string>
+    <string name="empty_category_notes">该分类下暂无文档</string>
+
+    <!-- Content descriptions -->
+    <string name="desc_add_note">添加文档</string>
+
+    <!-- Menu items -->
+    <string name="menu_search">搜索</string>
+    <string name="menu_category">分类</string>
+    <string name="menu_save">保存</string>
+    <string name="menu_edit">编辑</string>
+    <string name="menu_delete">删除</string>
+    <string name="menu_logout">退出登录</string>
+
+    <!-- Categories -->
+    <string name="category_all">全部</string>
+    <string name="category_work">工作文档</string>
+    <string name="category_study">学习笔记</string>
+    <string name="category_life">生活记录</string>
+    <string name="category_other">其他文档</string>
+
+    <!-- Other labels -->
+    <string name="label_select_category">选择分类</string>
+    <string name="label_select_category_colon">选择分类：</string>
+    <string name="label_enter_search_keyword">请输入搜索关键词</string>
+
+    <!-- Category arrays -->
+    <string-array name="categories_all">
+        <item>@string/category_all</item>
+        <item>@string/category_work</item>
+        <item>@string/category_study</item>
+        <item>@string/category_life</item>
+        <item>@string/category_other</item>
+    </string-array>
+
+    <string-array name="categories">
+        <item>@string/category_work</item>
+        <item>@string/category_study</item>
+        <item>@string/category_life</item>
+        <item>@string/category_other</item>
+    </string-array>
+
+    <!-- 主页统计 -->
+    <string name="stats_total_notes">总文档数</string>
+    <string name="stats_today_notes">今日新增</string>
+
+    <!-- 其他 -->
+    <string name="search_title">搜索</string>
+    <string name="add_spark">创建文档</string>
+</resources>
